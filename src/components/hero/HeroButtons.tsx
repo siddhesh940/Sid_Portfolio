@@ -26,7 +26,7 @@ export default function HeroButtons() {
       </Link>
 
       <a
-        href="/Resume/CV_Siddhesh Patil.pdf"
+        href="/Resume/Siddhesh_Patil_Resume.pdf"
         download
         className="flex items-center gap-2 px-6 py-3 rounded-lg
                    border border-slate-600
