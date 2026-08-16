@@ -1,239 +1,212 @@
 "use client";
 
-import { motion } from "framer-motion";
-
-// ── React Icons imports ──
+import { FaBrain, FaServer } from "react-icons/fa";
 import {
-    FaBrain,
-    FaChartBar,
-    FaComments,
-    FaFileImage,
-    FaFilePowerpoint,
-    FaNetworkWired,
-} from "react-icons/fa";
-import {
-    HiChip,
-    HiCode,
-    HiCog,
-    HiDatabase,
-    HiLightningBolt,
-    HiPresentationChartBar,
-    HiUserGroup,
+  HiChip,
+  HiCode,
+  HiCog,
+  HiDatabase,
+  HiLightningBolt,
 } from "react-icons/hi";
+import { useState } from "react";
 import {
-    SiCss3,
-    SiGit,
-    SiHtml5,
-    SiJavascript,
-    SiLinux,
-    SiMysql,
-    SiNumpy,
-    SiPandas,
-    SiPython,
-    SiReact,
-    SiScikitlearn,
-    SiSupabase,
-    SiTableau,
+  SiCss3,
+  SiFastapi,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiLangchain,
+  SiLinux,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiNumpy,
+  SiOpenai,
+  SiPandas,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiScikitlearn,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+  SiVercel,
 } from "react-icons/si";
-import { TbChartDonutFilled } from "react-icons/tb";
+import { TbBinaryTree, TbDatabase } from "react-icons/tb";
+import { FiLock, FiShield } from "react-icons/fi";
 import { VscVscode } from "react-icons/vsc";
 
 import SectionWrapper from "../components/SectionWrapper";
 import SkillCard from "../components/skills/SkillCard";
 import SkillCategory, {
-    type SkillItem,
+  type SkillItem,
 } from "../components/skills/SkillCategory";
-
-/* ═══════════════════════════════════════════
-   DATA
-   ═══════════════════════════════════════════ */
-
-const programmingSkills: SkillItem[] = [
-  { icon: SiPython, name: "Python", color: "#3776AB" },
-  { icon: SiHtml5, name: "HTML", color: "#E34F26" },
-  { icon: SiCss3, name: "CSS", color: "#1572B6" },
-  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
-  { icon: SiReact, name: "React", color: "#61DAFB" },
-];
-
-const databaseSkills: SkillItem[] = [
-  { icon: SiMysql, name: "MySQL", color: "#4479A1" },
-  { icon: SiSupabase, name: "Supabase", color: "#3ECF8E" },
-];
-
-const mlSkills: SkillItem[] = [
-  { icon: SiPandas, name: "Pandas", color: "#150458" },
-  { icon: SiNumpy, name: "NumPy", color: "#013243" },
-  { icon: FaChartBar, name: "Matplotlib", color: "#11557C" },
-  { icon: FaChartBar, name: "Seaborn", color: "#444876" },
-  { icon: SiScikitlearn, name: "Scikit-learn", color: "#F7931E" },
-];
-
-const mlTags = [
-  "Regression",
-  "Decision Tree",
-  "Random Forest",
-  "Naive Bayes",
-  "SVM",
-  "KNN",
-  "K-Means",
-  "PCA",
-  "Clustering",
-  "Dimensionality Reduction",
-];
-
-const dlSkills: SkillItem[] = [
-  { icon: FaBrain, name: "Neural Networks", color: "#FF6F61" },
-  { icon: FaFileImage, name: "CNN", color: "#8B5CF6" },
-  { icon: FaNetworkWired, name: "MLP", color: "#06B6D4" },
-  { icon: FaComments, name: "NLP", color: "#10B981" },
-];
-
-const dlTags = [
-  "Image Classification",
-  "Sentiment Analysis",
-  "Speech-to-Text",
-  "Text-to-Speech",
-  "Chatbots",
-  "Generative AI",
-];
-
-const biSkills: SkillItem[] = [
-  { icon: TbChartDonutFilled, name: "Power BI", color: "#F2C811" },
-  { icon: SiTableau, name: "Tableau", color: "#E97627" },
-  { icon: FaFilePowerpoint, name: "PowerPoint", color: "#D24726" },
-];
-
-const toolSkills: SkillItem[] = [
-  { icon: SiGit, name: "Git", color: "#F05032" },
-  { icon: VscVscode, name: "VS Code", color: "#007ACC" },
-  { icon: SiLinux, name: "Linux", color: "#FCC624" },
-];
-
-const softSkills = ["Problem Solving", "Communication", "Teamwork"];
-
-/* ═══════════════════════════════════════════
-   CATEGORIES CONFIG
-   ═══════════════════════════════════════════ */
 
 interface CategoryConfig {
   title: string;
+  module: string;
   headerIcon: React.ReactNode;
+  accent: string;
   skills: SkillItem[];
   tags?: string[];
 }
 
 const categories: CategoryConfig[] = [
   {
-    title: "Programming & Web Development",
+    title: "Languages",
+    module: "01",
     headerIcon: <HiCode />,
-    skills: programmingSkills,
+    accent: "#fbbf24",
+    skills: [
+      { icon: SiPython, name: "Python", color: "#93c5fd" },
+      { icon: SiJavascript, name: "JavaScript", color: "#facc15" },
+      { icon: SiTypescript, name: "TypeScript", color: "#60a5fa" },
+      { icon: TbDatabase, name: "SQL", color: "#fbbf24" },
+    ],
+  },
+  {
+    title: "Frontend",
+    module: "02",
+    headerIcon: <SiReact />,
+    accent: "#22d3ee",
+    skills: [
+      { icon: SiReact, name: "React.js", color: "#22d3ee" },
+      { icon: SiNextdotjs, name: "Next.js", color: "#e2e8f0" },
+      { icon: SiHtml5, name: "HTML5", color: "#fb923c" },
+      { icon: SiCss3, name: "CSS3", color: "#38bdf8" },
+      { icon: SiTailwindcss, name: "Tailwind", color: "#06b6d4" },
+    ],
+  },
+  {
+    title: "Backend",
+    module: "03",
+    headerIcon: <FaServer />,
+    accent: "#a78bfa",
+    skills: [
+      { icon: SiNodedotjs, name: "Node.js", color: "#22c55e" },
+      { icon: SiFastapi, name: "FastAPI", color: "#2dd4bf" },
+      { icon: HiCog, name: "REST APIs", color: "#a78bfa" },
+    ],
+  },
+  {
+    title: "AI & GenAI",
+    module: "04",
+    headerIcon: <FaBrain />,
+    accent: "#34d399",
+    skills: [
+      { icon: SiOpenai, name: "OpenAI API", color: "#5eead4" },
+      { icon: SiLangchain, name: "LangChain", color: "#34d399" },
+    ],
+    tags: ["GPT-4", "LLM APIs", "RAG", "Generative AI"],
+  },
+  {
+    title: "ML & NLP",
+    module: "05",
+    headerIcon: <HiLightningBolt />,
+    accent: "#f472b6",
+    skills: [
+      { icon: SiScikitlearn, name: "Scikit-learn", color: "#fbbf24" },
+      { icon: SiPandas, name: "Pandas", color: "#fb7185" },
+      { icon: SiNumpy, name: "NumPy", color: "#60a5fa" },
+    ],
+    tags: ["TF-IDF", "NLP", "Matplotlib", "Seaborn"],
   },
   {
     title: "Databases",
+    module: "06",
     headerIcon: <HiDatabase />,
-    skills: databaseSkills,
+    accent: "#38bdf8",
+    skills: [
+      { icon: SiPostgresql, name: "PostgreSQL", color: "#38bdf8" },
+      { icon: SiMysql, name: "MySQL", color: "#93c5fd" },
+      { icon: SiMongodb, name: "MongoDB", color: "#22c55e" },
+      { icon: SiSupabase, name: "Supabase", color: "#3ecf8e" },
+    ],
   },
   {
-    title: "Machine Learning & Data Science",
-    headerIcon: <HiChip />,
-    skills: mlSkills,
-    tags: mlTags,
-  },
-  {
-    title: "Deep Learning & AI",
-    headerIcon: <HiLightningBolt />,
-    skills: dlSkills,
-    tags: dlTags,
-  },
-  {
-    title: "Data Visualization & BI",
-    headerIcon: <HiPresentationChartBar />,
-    skills: biSkills,
-  },
-  {
-    title: "Tools & Platforms",
+    title: "Developer Tools",
+    module: "07",
     headerIcon: <HiCog />,
-    skills: toolSkills,
+    accent: "#94a3b8",
+    skills: [
+      { icon: SiGit, name: "Git", color: "#f87171" },
+      { icon: SiGithub, name: "GitHub", color: "#e2e8f0" },
+      { icon: VscVscode, name: "VS Code", color: "#38bdf8" },
+      { icon: SiVercel, name: "Vercel", color: "#a3a3a3" },
+      { icon: SiLinux, name: "Linux", color: "#facc15" },
+    ],
+  },
+  {
+    title: "Core Concepts",
+    module: "08",
+    headerIcon: <HiChip />,
+    accent: "#fb923c",
+    skills: [
+      { icon: TbBinaryTree, name: "DSA", color: "#fb923c" },
+      { icon: HiDatabase, name: "DBMS", color: "#38bdf8" },
+      { icon: FiLock, name: "Authentication", color: "#34d399" },
+      { icon: FiShield, name: "Authorization", color: "#a78bfa" },
+    ],
   },
 ];
 
-/* ═══════════════════════════════════════════
-   COMPONENT
-   ═══════════════════════════════════════════ */
-
 export default function SkillsSection() {
-  /* ── Category lookup helpers ── */
-  const cat = (title: string) => categories.find((c) => c.title === title)!;
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+
+  const handleCategoryEnter = (title: string) => setActiveCategory(title);
+  const handleCategoryLeave = () => setActiveCategory(null);
+  const handleSkillEnter = (name: string, title: string) => {
+    setActiveSkill(name);
+    setActiveCategory(title);
+  };
+  const handleSkillLeave = () => setActiveSkill(null);
 
   return (
     <SectionWrapper id="skills" title="Skills">
-      <div className="max-w-6xl mx-auto space-y-5">
-        {/* ── Row 1 — 3 equal cards (no tags, similar height) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {[
-            "Programming & Web Development",
-            "Databases",
-            "Tools & Platforms",
-          ].map((t, i) => {
-            const c = cat(t);
-            return (
-              <SkillCard key={t} title={c.title} icon={c.headerIcon} index={i}>
-                <SkillCategory skills={c.skills} tags={c.tags} />
-              </SkillCard>
-            );
-          })}
-        </div>
+      <div className="mb-4 flex items-center gap-3 text-sm font-medium text-slate-500 dark:text-slate-400">
+        <HiChip className="w-4 h-4 text-primary-400" />
+        <span className="font-mono">engineering_stack.modules</span>
+        <span className="text-slate-400/60">— 08 modules</span>
+      </div>
 
-        {/* ── Row 2 — 2 wider cards with tags (balanced height) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {["Machine Learning & Data Science", "Deep Learning & AI"].map(
-            (t, i) => {
-              const c = cat(t);
-              return (
-                <SkillCard
-                  key={t}
-                  title={c.title}
-                  icon={c.headerIcon}
-                  index={i + 3}
-                >
-                  <SkillCategory skills={c.skills} tags={c.tags} />
-                </SkillCard>
-              );
-            },
-          )}
-        </div>
+      <p className="mb-10 text-sm text-slate-500 dark:text-slate-400">
+        Hover a category or technology to trace its connections across the map.
+      </p>
 
-        {/* ── Row 3 — 2 balanced cards ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {(() => {
-            const viz = cat("Data Visualization & BI");
-            return (
-              <SkillCard title={viz.title} icon={viz.headerIcon} index={5}>
-                <SkillCategory skills={viz.skills} tags={viz.tags} />
-              </SkillCard>
-            );
-          })()}
-
-          <SkillCard title="Soft Skills" icon={<HiUserGroup />} index={6}>
-            <div className="flex flex-wrap gap-2">
-              {softSkills.map((skill) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{ scale: 1.05 }}
-                  className="px-3 py-1 text-xs font-medium rounded-full
-                             bg-indigo-500/10
-                             text-indigo-300
-                             border border-indigo-600/30
-                             hover:border-indigo-500
-                             transition-colors duration-300 cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </SkillCard>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+        {categories.map((c, i) => (
+          <div
+            key={c.title}
+            onMouseEnter={() => handleCategoryEnter(c.title)}
+            onMouseLeave={handleCategoryLeave}
+          >
+            <SkillCard
+              title={c.title}
+              icon={c.headerIcon}
+              index={i}
+              module={c.module}
+              accent={c.accent}
+              dimmed={activeCategory !== null && activeCategory !== c.title}
+              active={activeCategory === c.title}
+            >
+              <SkillCategory
+                skills={c.skills}
+                tags={c.tags}
+                accent={c.accent}
+                dimmed={activeCategory !== null && activeCategory !== c.title}
+                activeSkill={activeSkill}
+                onSkillActive={(name) =>
+                  name
+                    ? handleSkillEnter(name, c.title)
+                    : handleSkillLeave()
+                }
+              />
+            </SkillCard>
+          </div>
+        ))}
       </div>
     </SectionWrapper>
   );

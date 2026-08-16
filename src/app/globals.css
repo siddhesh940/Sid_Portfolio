@@ -18,6 +18,29 @@
   ::selection {
     @apply bg-primary-500/30;
   }
+
+  /* Accessible focus ring for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid rgba(99, 102, 241, 0.85);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Slim, theme-aware scrollbar */
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.35);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.6);
+  }
 }
 
 @layer utilities {
@@ -32,9 +55,120 @@
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
   }
+
+  /* ── Premium background grid ── */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .bg-grid-sm {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  /* ── Glass panel ── */
+  .glass-panel {
+    @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/70 dark:border-slate-700/60;
+  }
+
+  /* ── Glow text ── */
+  .glow-cyan {
+    text-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
+  }
+  .glow-indigo {
+    text-shadow: 0 0 24px rgba(99, 102, 241, 0.5);
+  }
 }
 
-/* NProgress styles */
+/* ═══════════════════════════════════════════
+   ENGINEERING CORE — orbit animations
+   ═══════════════════════════════════════════ */
+@keyframes ec-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ec-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes ec-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes ec-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ec-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Cursor: upgraded custom cursor ── */
+.cursor-dot {
+  @apply pointer-events-none fixed top-0 left-0 z-[9999] rounded-full bg-primary-500;
+}
+
+.cursor-ring {
+  @apply pointer-events-none fixed top-0 left-0 z-[9998] rounded-full border-2 border-primary-400/60;
+}
+
+.cursor-dot.cursor-hover {
+  transform: translate(-50%, -50%) scale(1.9) !important;
+}
+
+.cursor-ring.cursor-hover {
+  border-color: rgba(34, 211, 238, 0.9) !important;
+}
+
+/* ── Gradient border helper ── */
+.gradient-border {
+  position: relative;
+  background:
+    linear-gradient(var(--gb-bg, rgba(15, 23, 42, 0.6)), var(--gb-bg, rgba(15, 23, 42, 0.6))) padding-box,
+    linear-gradient(120deg, rgba(99, 102, 241, 0.6), rgba(168, 85, 247, 0.5), rgba(34, 211, 238, 0.5), rgba(99, 102, 241, 0.6)) border-box;
+  border: 1px solid transparent;
+  background-size: 100% 100%, 300% 100%;
+  animation: ec-gradient-shift 8s ease infinite;
+}
+
+/* ── NProgress styles ── */
 #nprogress {
   pointer-events: none;
 }
@@ -74,6 +208,64 @@
   transform: rotate(3deg) translate(0px, -4px);
 }
 
+/* ── Project scanline / hover effect ── */
+@keyframes ec-scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(320%);
+  }
+}
+.ec-scanline {
+  height: 45%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(34, 211, 238, 0.22),
+    transparent
+  );
+  animation: ec-scan 1.6s linear infinite;
+}
+
+/* ── Terminal caret ── */
+@keyframes ec-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.ec-caret {
+  animation: ec-caret 1s step-end infinite;
+}
+
+/* ── Data pulse dot ── */
+@keyframes ec-data {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.9);
+    opacity: 1;
+  }
+}
+.ec-data {
+  animation: ec-data 2.2s ease-in-out infinite;
+}
+
+/* ── Cinematic section title underline ── */
+.ec-title-line {
+  background: linear-gradient(90deg, #6366f1, #a855f7, #22d3ee, #6366f1);
+  background-size: 300% 100%;
+  animation: ec-gradient-shift 6s ease infinite;
+}
+
 /* Prose styles for blog pages */
 .prose h2 {
   @apply text-gray-900 dark:text-white;
@@ -89,4 +281,23 @@
 }
 .prose strong {
   @apply text-gray-900 dark:text-white;
+}
+
+/* ═══════════════════════════════════════════
+   REDUCED MOTION — respect user preference
+   ═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
 }

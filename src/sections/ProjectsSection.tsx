@@ -128,11 +128,11 @@ export default function ProjectsSection() {
         transition={{ delay: 0.3, duration: 0.5 }}
       >
         A collection of real-world AI and web development projects I&apos;ve
-        built.
+        engineered and shipped.
       </motion.p>
 
       {/* Projects Grid */}
-      <ProjectsGrid projects={projects} />
+      <ProjectsGrid projects={projects} featuredCount={3} />
     </SectionWrapper>
   );
 }

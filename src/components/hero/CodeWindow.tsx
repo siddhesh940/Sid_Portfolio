@@ -26,7 +26,7 @@ const codeLines = [
     segments: [
       { text: "role", color: "#93c5fd" },
       { text: ": ", color: "#e2e8f0" },
-      { text: '"Full Stack Developer"', color: "#86efac" },
+      { text: '"AI + Full Stack Developer"', color: "#86efac" },
       { text: ",", color: "#e2e8f0" },
     ],
   },

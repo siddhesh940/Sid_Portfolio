@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
 
+const RESUME_PATH = "/Resume/Siddhesh_Patil_Software_Developer.pdf";
+
 export default function HeroButtons() {
   return (
     <motion.div
@@ -15,27 +17,28 @@ export default function HeroButtons() {
       <Link
         href="#projects"
         className="group flex items-center gap-2 px-6 py-3 rounded-lg
-                   bg-indigo-600 hover:bg-indigo-700
+                   bg-gradient-to-r from-indigo-600 to-purple-600
                    text-white font-medium text-sm
                    shadow-lg shadow-indigo-500/25
-                   hover:shadow-indigo-500/40
+                   hover:shadow-indigo-500/40 hover:brightness-110
                    transition-all duration-200"
       >
-        View My Projects
+        View Projects
         <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </Link>
 
       <a
-        href="/Resume/Siddhesh_Patil_Resume.pdf"
+        href={RESUME_PATH}
         download
-        className="flex items-center gap-2 px-6 py-3 rounded-lg
-                   border border-slate-600
-                   text-gray-300 font-medium text-sm
-                   hover:bg-slate-800 hover:text-white hover:border-slate-500
+        className="group flex items-center gap-2 px-6 py-3 rounded-lg
+                   border border-slate-500/60
+                   text-slate-300 font-medium text-sm
+                   hover:bg-slate-800/80 hover:text-white hover:border-primary-400/60
+                   hover:shadow-lg hover:shadow-primary-500/10
                    transition-all duration-200"
       >
-        <FiDownload className="w-4 h-4" />
-        Download Resume
+        <FiDownload className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+        View Resume
       </a>
     </motion.div>
   );

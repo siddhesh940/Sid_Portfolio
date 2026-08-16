@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, type MouseEvent } from "react";
-import { FiArrowRight, FiGithub, FiGlobe } from "react-icons/fi";
+import { useRef, useState, type MouseEvent } from "react";
+import { FiArrowRight, FiGithub, FiGlobe, FiMaximize2 } from "react-icons/fi";
 import ProjectBadge from "./ProjectBadge";
+import ProjectModal from "./ProjectModal";
 
 export interface ProjectData {
   title: string;
@@ -24,6 +25,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
   // Motion values for tilt
   const mouseX = useMotionValue(0);
@@ -51,9 +53,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      className="group relative flex flex-col h-full
+    <>
+      <motion.div
+        ref={cardRef}
+        className="group relative flex flex-col h-full
                  rounded-xl overflow-hidden
                  border border-slate-200 dark:border-slate-700
                  bg-white dark:bg-slate-900/60
@@ -109,6 +112,29 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent
                             opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             />
+
+            {/* Scan line */}
+            <div
+              className="absolute inset-x-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ec-scanline pointer-events-none"
+            />
+
+            {/* Open preview */}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={`Open ${project.title} project preview`}
+              className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer"
+            >
+              <span className="flex items-center gap-2 px-4 py-2 rounded-lg
+                             bg-slate-950/70 backdrop-blur border border-cyan-400/30
+                             text-xs font-semibold tracking-wide text-cyan-300
+                             opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100
+                             transition-all duration-300">
+                <FiMaximize2 className="w-3.5 h-3.5" />
+                EXPLORE PROJECT
+                <FiArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -184,5 +210,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       </div>
     </motion.div>
+
+    <AnimatePresence>
+      {open && <ProjectModal project={project} onClose={() => setOpen(false)} />}
+    </AnimatePresence>
+    </>
   );
 }

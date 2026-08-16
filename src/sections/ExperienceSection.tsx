@@ -21,14 +21,14 @@ const experiences: ExperienceEntry[] = [
   {
     id: 1,
     company: "Mauli Infotech (OPC) Pvt. Ltd.",
-    role: "Intern — SQL & Performance Analysis",
+    role: "Software Developer Intern",
     duration: "Dec 2025 – Feb 2026",
     location: "Navi Mumbai, Maharashtra",
     logo: "/Experience/mauli_infotech_opc_private_limited_logo.jpg",
     points: [
-      "Working on a real-time SQL workload automation project involving AWR/ASH file upload, parsing, and systematic workload analysis.",
-      "Developed features for high-load detection, time-window selection, and automated RCA execution to identify performance bottlenecks, helping DBAs quickly prioritize tuning actions for 24×7 workloads.",
-      "Contributing to backend logic and dashboard integration to present clean, actionable performance insights.",
+      "Engineered a Python-based workload analysis pipeline using FastAPI, Pandas and BeautifulSoup to parse AWR/ASH reports into structured data, reducing manual SQL workload analysis from hours to under 4 minutes.",
+      "Developed automated high-load detection and Root Cause Analysis (RCA) modules to analyze top SQL, wait events, CPU/IO workload and identify performance bottlenecks across database workloads.",
+      "Built backend APIs and an interactive dashboard for processing workload results, visualizing database performance and helping DBAs identify problematic SQL and prioritize tuning actions.",
     ],
     deployment: "https://db-guardian-ai.vercel.app/",
     github: "https://github.com/siddhesh940/DBGuardian-AI.git",
@@ -87,6 +87,7 @@ function ExperienceCard({
                     shadow-sm dark:shadow-none
                     hover:shadow-lg dark:hover:shadow-primary-500/5
                     hover:border-primary-500/30
+                    hover:-translate-y-1
                     transition-all duration-300"
       >
         {/* Header */}
@@ -124,9 +125,17 @@ function ExperienceCard({
                 {entry.duration}
               </span>
             </div>
-            <p className="mt-1 text-sm font-medium text-primary-600 dark:text-primary-400">
-              {entry.role}
-            </p>
+            <div className="mt-1 flex flex-wrap items-center gap-2">
+              <p className="text-sm font-medium text-primary-600 dark:text-primary-400">
+                {entry.role}
+              </p>
+              {index === 0 && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-full bg-green-500/15 text-green-500 border border-green-500/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  Recent
+                </span>
+              )}
+            </div>
             <p className="mt-1 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <FiMapPin className="w-3 h-3" />
               {entry.location}

@@ -14,9 +14,9 @@ export default function ResumeSection() {
 
       <div className="max-w-7xl mx-auto px-4">
         <ResumeCard
-          fileName="Siddhesh_Patil_Resume"
-          filePath="/Resume/Siddhesh_Patil_Resume.pdf"
-          description="B.E. Computer Engineering student with hands-on experience in full-stack web development, AI/ML projects, and data science. Explore my complete professional profile."
+          fileName="Siddhesh_Patil_Software_Developer"
+          filePath="/Resume/Siddhesh_Patil_Software_Developer.pdf"
+          description="AI + Full-Stack Software Developer with hands-on experience building full-stack web applications and AI-powered software using Python, TypeScript, React, Next.js, Node.js, FastAPI, SQL and Supabase. Explore my complete professional profile."
         />
       </div>
     </SectionWrapper>

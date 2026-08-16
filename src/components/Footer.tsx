@@ -2,29 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-    FiGithub,
-    FiHeart,
-    FiLinkedin,
-    FiMail,
-    FiMapPin,
-} from "react-icons/fi";
+import { FiGithub, FiHeart, FiLinkedin, FiMail, FiMapPin } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
-
-const footerLinks = [
-  { label: "Skills", href: "/skills" },
-  { label: "Projects", href: "/projects" },
-  { label: "Experience", href: "/experience" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Resume", href: "/resume" },
-  { label: "Contact", href: "/contact" },
-];
 
 const socialLinks = [
   { icon: FiGithub, href: "https://github.com/siddhesh940", label: "GitHub" },
   {
     icon: FiLinkedin,
-    href: "https://linkedin.com/in/siddhesh-patil-it",
+    href: "https://www.linkedin.com/in/siddhesh-patil-268b96311/",
     label: "LinkedIn",
   },
   {
@@ -39,10 +24,15 @@ const socialLinks = [
   },
 ];
 
+const pipeline = ["RAW DATA", "CODE", "AI", "INSIGHT", "PRODUCT"];
+
 export default function Footer() {
   return (
-    <footer className="relative border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+    <footer className="relative border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm overflow-hidden">
+      {/* Accent top line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/60 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-4">
@@ -57,35 +47,38 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
-              Full-stack developer passionate about building modern web
-              applications with AI integration.
+              AI + Full-Stack Software Developer engineering intelligent,
+              scalable software and AI-powered experiences.
             </p>
             <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
               <FiMapPin className="w-3.5 h-3.5" />
-              <span>India</span>
+              <span>Navi Mumbai, India</span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+          {/* Pipeline tagline */}
+          <div className="hidden md:flex flex-col justify-center items-center gap-3">
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-primary-500 dark:text-primary-400 uppercase">
+              engineering pipeline
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {pipeline.map((step, i) => (
+                <motion.span
+                  key={step}
+                  className="px-2.5 py-1 rounded-md glass-panel text-[10px] font-mono font-semibold text-slate-500 dark:text-slate-400"
+                  whileHover={{ scale: 1.08, color: "#818cf8" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {step}
+                  {i < pipeline.length - 1 && (
+                    <span className="ml-2 text-primary-400">→</span>
+                  )}
+                </motion.span>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* Social */}
+          {/* Connect */}
           <div>
             <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
               Connect
@@ -126,7 +119,7 @@ export default function Footer() {
             Tailwind CSS.
           </p>
           <p className="text-xs text-gray-400 dark:text-gray-500">
-            Designed & Developed by Siddhesh Patil
+            Designed &amp; Developed by Siddhesh Patil
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
+import CustomCursor from "./CustomCursor";
 import Footer from "./Footer";
 import LoadingScreen from "./LoadingScreen";
 import Navbar from "./Navbar";
@@ -27,6 +28,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <>
       <RouteProgress />
+      <CustomCursor />
 
       <AnimatePresence mode="wait">
         {loading && <LoadingScreen key="loader" />}

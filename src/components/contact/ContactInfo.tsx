@@ -2,12 +2,15 @@
 
 import { motion } from "framer-motion";
 import {
-    FiCheckCircle,
-    FiGithub,
-    FiLinkedin,
-    FiMail,
-    FiMapPin,
+  FiCheckCircle,
+  FiDownload,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+  FiMapPin,
 } from "react-icons/fi";
+
+const RESUME_PATH = "/Resume/Siddhesh_Patil_Software_Developer.pdf";
 
 const socials = [
   {
@@ -45,11 +48,17 @@ export default function ContactInfo() {
                     border border-white/10 p-8
                     shadow-lg
                     hover:scale-[1.02] hover:shadow-xl
-                    transition-all duration-300"
+                    transition-all duration-300
+                    relative overflow-hidden"
       >
+        {/* Corner accent */}
+        <div className="pointer-events-none absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-indigo-500/20 to-transparent rounded-bl-full" />
+
         {/* Name & Role */}
         <h3 className="text-2xl font-bold text-white">Siddhesh Patil</h3>
-        <p className="mt-1 text-indigo-400 font-medium">Full Stack Developer</p>
+        <p className="mt-1 text-indigo-400 font-medium">
+          AI + Full-Stack Software Developer
+        </p>
 
         {/* Details */}
         <div className="mt-6 space-y-4">
@@ -89,6 +98,21 @@ export default function ContactInfo() {
           })}
         </div>
       </div>
+
+      {/* Resume Button */}
+      <a
+        href={RESUME_PATH}
+        download
+        className="flex items-center justify-center gap-2
+                   bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg px-6 py-3
+                   text-white font-medium text-sm
+                   shadow-lg shadow-indigo-500/25
+                   hover:shadow-indigo-500/40 hover:brightness-110
+                   transition-all duration-200"
+      >
+        <FiDownload className="w-4 h-4" />
+        Download Resume
+      </a>
 
       {/* Hire Me Button */}
       <a

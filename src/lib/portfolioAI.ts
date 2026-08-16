@@ -3,31 +3,90 @@
 
 export const portfolioContext = {
   name: "Siddhesh Patil",
-  title: "Full-Stack Developer",
+  title: "AI + Full-Stack Software Developer",
   email: "patilsiddhesh2810@gmail.com",
   github: "https://github.com/siddhesh940",
-  linkedin: "https://linkedin.com/in/siddhesh-patil-it",
+  linkedin: "https://www.linkedin.com/in/siddhesh-patil-268b96311/",
   leetcode: "https://leetcode.com/u/Siddhesh_Patil_/",
+  resume: "/Resume/Siddhesh_Patil_Software_Developer.pdf",
 
   about:
-    "Siddhesh Patil is a passionate full-stack developer specializing in modern web development, AI, and data science. He builds production-grade applications using React, Next.js, TypeScript, and AI/ML technologies.",
+    "Siddhesh Patil is an AI + Full-Stack Software Developer, a Computer Engineering graduate from the University of Mumbai. He builds intelligent software, scalable web applications and AI-powered experiences using Python, JavaScript, TypeScript, React, Next.js, Node.js, FastAPI, SQL, Supabase, LLMs, LangChain and RAG.",
 
   skills: [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "SQL",
     "React",
     "Next.js",
-    "TypeScript",
-    "JavaScript",
-    "Python",
-    "Node.js",
     "Tailwind CSS",
-    "AI/ML",
-    "Oracle Database",
-    "PostgreSQL",
-    "Prisma ORM",
-    "Git/GitHub",
+    "Node.js",
+    "FastAPI",
     "REST APIs",
-    "PWA",
-    "Framer Motion",
+    "OpenAI API",
+    "LangChain",
+    "RAG",
+    "Generative AI",
+    "Scikit-learn",
+    "Pandas",
+    "NumPy",
+    "NLP",
+    "PostgreSQL",
+    "MySQL",
+    "MongoDB",
+    "Supabase",
+    "Git/GitHub",
+    "Vercel",
+    "Linux",
+    "DSA",
+    "Authentication",
+  ],
+
+  experience: [
+    {
+      role: "Software Developer Intern",
+      company: "Mauli Infotech (OPC) Pvt. Ltd.",
+      duration: "Dec 2025 – Feb 2026",
+      highlights:
+        "Engineered a Python-based workload analysis pipeline using FastAPI, Pandas and BeautifulSoup to parse AWR/ASH reports into structured data, cutting manual SQL workload analysis from hours to under 4 minutes. Built high-load detection and RCA modules, plus backend APIs and a dashboard for DBAs.",
+    },
+    {
+      role: "Web Development Intern",
+      company: "Prodigy Infotech",
+      duration: "Jan 2025 – Feb 2025",
+      highlights:
+        "Built responsive web development modules using HTML, CSS, JavaScript and React.",
+    },
+  ],
+
+  education: [
+    {
+      degree: "B.E. in Computer Engineering",
+      institute: "Pillai HOC College of Engineering and Technology, University of Mumbai",
+      duration: "2022 – 2026",
+      score: "CGPA 8.30",
+    },
+    {
+      degree: "HSC",
+      institute: "Sudhagad Education Society Higher & Secondary College",
+      score: "65.73%",
+    },
+    {
+      degree: "SSC",
+      institute: "Sudhagad Education Society High School",
+      score: "90.00%",
+    },
+  ],
+
+  certifications: [
+    "Advanced AI and Data Science",
+    "AI Foundations",
+    "Python for Data Science",
+  ],
+
+  achievements: [
+    "Finalist – InnovGenius Ideathon 2026 (ACM TCET × TCS), selected among 700+ registrations. Built and deployed CampusAI, an AI-driven student onboarding platform.",
   ],
 
   projects: [
@@ -131,7 +190,7 @@ export function generateChatResponse(query: string): ChatResponse {
   // Greetings
   if (/^(hi|hello|hey|hola|namaste|sup|yo)\b/.test(q)) {
     return {
-      text: `Hello! 👋 I'm Siddhesh's portfolio assistant. I can tell you about his projects, skills, experience, and more. What would you like to know?`,
+      text: `Hello! 👋 I'm Siddhesh's AI portfolio assistant. I can tell you about his projects, skills, experience, education, and more. What would you like to know?`,
     };
   }
 
@@ -216,21 +275,38 @@ export function generateChatResponse(query: string): ChatResponse {
   // Resume
   if (/resume|cv|download/.test(q)) {
     return {
-      text: `You can view and download Siddhesh's resume from the Resume section on this portfolio. It includes his education, experience, projects, and skills.`,
+      text: `You can view and download Siddhesh's resume here: ${ctx.resume}\n\nIt covers his experience, projects, education (CGPA 8.30), skills and certifications.`,
+    };
+  }
+
+  // Achievements
+  if (/achiev|award|winner|finalist|recogni|ideathon|hackathon/.test(q)) {
+    return {
+      text: `Siddhesh's key achievement:\n\n🏆 ${ctx.achievements[0]}\n\nHe has also earned certifications in Advanced AI & Data Science, AI Foundations, and Python for Data Science.`,
     };
   }
 
   // Education
   if (/education|study|university|college|degree|school/.test(q)) {
     return {
-      text: `You can find details about Siddhesh's education in the Education section of this portfolio. He has a strong academic background in Computer Science and Engineering.`,
+      text: `Siddhesh's education:\n\n${ctx.education
+        .map(
+          (e) =>
+            `🎓 **${e.degree}** — ${e.institute}${e.duration ? ` (${e.duration})` : ""}\n   ${e.score}`,
+        )
+        .join("\n\n")}`,
     };
   }
 
   // Experience
   if (/experience|work|job|internship|company|career/.test(q)) {
     return {
-      text: `Check out the Experience section on this portfolio for details about Siddhesh's professional experience, internships, and career journey.`,
+      text: `Siddhesh's experience:\n\n${ctx.experience
+        .map(
+          (e) =>
+            `💼 **${e.role}** — ${e.company} (${e.duration})\n   ${e.highlights}`,
+        )
+        .join("\n\n")}`,
     };
   }
 
