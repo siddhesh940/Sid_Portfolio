@@ -25,7 +25,7 @@ const educationData: EducationEntry[] = [
     institute: "Pillai HOC College Of Engineering and Technology",
     degree: "B.E in Computer Engineering",
     duration: "Oct 2022 – May 2026",
-    score: "CGPA: 7.91 (Upto 7th Semester)",
+    score: "CGPA: 8.30",
     location: "Rasayani, Maharashtra",
     logo: "/Education/Pillai_logo.png",
   },
